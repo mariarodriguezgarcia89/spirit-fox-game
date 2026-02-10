@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     // Referencias de componentes
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     
     // Estado del jugador
     private float moveInput;
@@ -36,11 +37,17 @@ public class PlayerController : MonoBehaviour
         // Obtener referencias a componentes
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         
         // Verificar que tenemos todas las referencias necesarias
         if (rb == null)
         {
             Debug.LogError("¡Falta Rigidbody2D en el jugador!");
+        }
+        
+        if (animator == null)
+        {
+            Debug.LogError("¡Falta Animator en el jugador!");
         }
         
         if (groundCheck == null)
@@ -59,6 +66,9 @@ public class PlayerController : MonoBehaviour
         
         // Detectar si está en el suelo
         CheckGround();
+        
+        // Actualizar animaciones
+        UpdateAnimations();
     }
     
     void FixedUpdate()
@@ -114,28 +124,48 @@ public class PlayerController : MonoBehaviour
     }
     
     /// <summary>
-/// Detecta si el jugador está tocando el suelo
-/// </summary>
-private void CheckGround()
-{
-    if (groundCheck == null)
+    /// Detecta si el jugador está tocando el suelo
+    /// </summary>
+    private void CheckGround()
     {
-        Debug.LogWarning("GroundCheck is NULL!");
-        isGrounded = true; // Fallback temporal
-        return;
+        if (groundCheck == null)
+        {
+            Debug.LogWarning("GroundCheck is NULL!");
+            isGrounded = true; // Fallback temporal
+            return;
+        }
+        
+        // Detectar colisión con el suelo usando un círculo
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position, 
+            groundCheckRadius, 
+            groundLayer
+        );
     }
     
-    // Detectar colisión con el suelo usando un círculo
-    isGrounded = Physics2D.OverlapCircle(
-        groundCheck.position, 
-        groundCheckRadius, 
-        groundLayer
-    );
-    
-    Debug.Log("Is Grounded: " + isGrounded + " | Position: " + groundCheck.position);
-}
-
-
+    /// <summary>
+    /// Actualiza los parámetros del Animator según el estado del jugador
+    /// </summary>
+    private void UpdateAnimations()
+    {
+        if (animator == null) 
+        {
+            Debug.LogError("Animator is NULL!");
+            return;
+        }
+        
+        // Actualizar parámetro isRunning
+        bool isRunning = Mathf.Abs(moveInput) > 0.01f;
+        Debug.Log("Setting isRunning to: " + isRunning + " | moveInput: " + moveInput);
+        animator.SetBool("isRunning", isRunning);
+        
+        // Actualizar parámetro isGrounded
+        animator.SetBool("isGrounded", isGrounded);
+        
+        // Actualizar parámetro isJumping
+        bool isJumping = !isGrounded;
+        animator.SetBool("isJumping", isJumping);
+    }
     
     /// <summary>
     /// Voltea el sprite según la dirección de movimiento

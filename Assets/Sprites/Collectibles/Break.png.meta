@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 264e72e28dc772546a2b04616ba5721a
+guid: baf88989475b31e4cb6f4a251ae60137
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2556899218066448116
-    second: Fox64_0
+      213: -6426412849335849376
+    second: Break_0
+  - first:
+      213: 5504277486448943824
+    second: Break_1
+  - first:
+      213: 3847257389965480688
+    second: Break_2
+  - first:
+      213: 1273466696024107936
+    second: Break_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +55,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fox64_0
+      name: Break_0
       rect:
         serializedVersion: 2
-        x: 199
-        y: 0
-        width: 902
-        height: 1241
+        x: 9
+        y: 8
+        width: 10
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4fe1353ba4eeb7320800000000000000
-      internalID: 2556899218066448116
+      spriteID: 06ea457ef8bc0d6a0800000000000000
+      internalID: -6426412849335849376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Break_1
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 6
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d228f4063f136c40800000000000000
+      internalID: 5504277486448943824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Break_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 6
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f293686634346530800000000000000
+      internalID: 3847257389965480688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Break_3
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 8
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0abaec186334ca110800000000000000
+      internalID: 1273466696024107936
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 0bea2e72479434f4da653074b60da8a0
     internalID: 0
     vertices: []
     indices: 
@@ -146,9 +221,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Fox64_0: 2556899218066448116
+      Break_0: -6426412849335849376
+      Break_1: 5504277486448943824
+      Break_2: 3847257389965480688
+      Break_3: 1273466696024107936
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

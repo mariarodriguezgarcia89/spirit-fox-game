@@ -61,15 +61,14 @@ public class PlayerHealth : MonoBehaviour
     }
     
     /// <summary>
-    /// El jugador muere
-    /// </summary>
+/// El jugador muere
+/// </summary>
     private void Die()
     {
         Debug.Log("¡El jugador ha muerto!");
-        // Por ahora solo reiniciamos la escena
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-        );
+    
+    // Cargar pantalla de Game Over
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }
     
     /// <summary>
