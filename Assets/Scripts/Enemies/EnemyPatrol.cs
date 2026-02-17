@@ -2,6 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Hace que el enemigo patrullaje entre dos puntos
+/// </summary>
 public class EnemyPatrol : MonoBehaviour
 {
     [Header("Patrol Settings")]
@@ -22,9 +23,11 @@ public class EnemyPatrol : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        // Buscar SpriteRenderer en hijos si no está en este objeto
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
-        // Guardar posición inicial
         startPosition = transform.position;
     }
     
@@ -33,37 +36,26 @@ public class EnemyPatrol : MonoBehaviour
         Patrol();
     }
     
-    /// <summary>
-    /// Patrulla entre dos puntos
-    /// </summary>
     private void Patrol()
     {
-        // Calcular límites de patrullaje
         float leftLimit = startPosition.x - patrolDistance;
         float rightLimit = startPosition.x + patrolDistance;
         
-        // Movimiento
         if (movingRight)
         {
             rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
-            spriteRenderer.flipX = false;
+            if (spriteRenderer != null) spriteRenderer.flipX = false;
             
-            // Cambiar dirección si llegó al límite derecho
             if (transform.position.x >= rightLimit)
-            {
                 movingRight = false;
-            }
         }
         else
         {
             rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
-            spriteRenderer.flipX = true;
+            if (spriteRenderer != null) spriteRenderer.flipX = true;
             
-            // Cambiar dirección si llegó al límite izquierdo
             if (transform.position.x <= leftLimit)
-            {
                 movingRight = true;
-            }
         }
     }
 }
