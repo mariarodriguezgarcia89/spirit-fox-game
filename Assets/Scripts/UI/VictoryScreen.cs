@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Maneja la pantalla de victoria
@@ -8,31 +8,36 @@ using UnityEngine.UI;
 public class VictoryScreen : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] private Text finalScoreText;
+    [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private TMP_Text finalTimeText;
     
     void Start()
     {
-        // TODO: Obtener puntuación real del juego
-        // Por ahora mostramos un valor de ejemplo
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayVictoryMusic();
+
         if (finalScoreText != null)
-        {
             finalScoreText.text = "Puntuación: 0";
+
+        if (finalTimeText != null)
+        {
+            float timeLeft = PlayerPrefs.GetFloat("TimeRemaining", 0f);
+            int seconds = Mathf.RoundToInt(timeLeft);
+            finalTimeText.text = "Tiempo restante: " + seconds + "s";
         }
     }
     
-    /// <summary>
-    /// Reinicia el nivel
-    /// </summary>
     public void PlayAgain()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        AudioManager.Instance?.PlayGameMusic();
         SceneManager.LoadScene("GameLevel");
     }
     
-    /// <summary>
-    /// Vuelve al menú principal
-    /// </summary>
     public void BackToMenu()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        AudioManager.Instance?.PlayMenuMusic();
         SceneManager.LoadScene("MainMenu");
     }
 }

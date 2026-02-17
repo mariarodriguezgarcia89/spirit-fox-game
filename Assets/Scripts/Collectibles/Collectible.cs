@@ -4,7 +4,6 @@ public class Collectible : MonoBehaviour
 {
     [Header("Collectible Settings")]
     [SerializeField] private int pointValue = 10;
-    [SerializeField] private AudioClip collectSound;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,6 +17,9 @@ public class Collectible : MonoBehaviour
             {
                 uiManager.AddScore(pointValue);
             }
+            
+            // Reproducir sonido de recolección
+            AudioManager.Instance.PlayCollectGem();
             
             // Destruir el objeto
             Destroy(gameObject);

@@ -41,5 +41,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 283518595
+    locked: 0
+  - name: Ground
+    uniqueID: 2205156565
+    locked: 0
+  - name: Collectibles
+    uniqueID: 3859309567
+    locked: 0
+  - name: Goal
+    uniqueID: 1575628721
+    locked: 0
+  - name: Enemies
+    uniqueID: 1386158575
+    locked: 0
+  - name: Player
+    uniqueID: 1979030103
+    locked: 0
+  - name: UI
+    uniqueID: 518076949
+    locked: 0
   m_RenderingLayers:
   - Default

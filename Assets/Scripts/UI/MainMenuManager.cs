@@ -6,11 +6,20 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MainMenuManager : MonoBehaviour
 {
+    void Start()
+    {
+        // Asegurarse de que suena la música del menú
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayMenuMusic();
+    }
+
     /// <summary>
     /// Inicia el juego (carga la escena de juego)
     /// </summary>
     public void PlayGame()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        AudioManager.Instance?.PlayGameMusic();
         Debug.Log("Cargando escena de juego...");
         SceneManager.LoadScene("GameLevel");
     }
@@ -20,10 +29,10 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
+        AudioManager.Instance?.PlayButtonClick();
         Debug.Log("Saliendo del juego...");
         Application.Quit();
         
-        // En el editor de Unity, esto detiene el juego
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif

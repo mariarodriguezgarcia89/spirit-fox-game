@@ -6,11 +6,19 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameOverScreen : MonoBehaviour
 {
+    void Start()
+    {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayGameOverMusic();
+    }
+
     /// <summary>
     /// Reinicia el nivel
     /// </summary>
     public void Retry()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        AudioManager.Instance?.PlayGameMusic();
         Debug.Log("Reintentando nivel...");
         SceneManager.LoadScene("GameLevel");
     }
@@ -20,6 +28,8 @@ public class GameOverScreen : MonoBehaviour
     /// </summary>
     public void BackToMenu()
     {
+        AudioManager.Instance?.PlayButtonClick();
+        AudioManager.Instance?.PlayMenuMusic();
         Debug.Log("Volviendo al menú...");
         SceneManager.LoadScene("MainMenu");
     }

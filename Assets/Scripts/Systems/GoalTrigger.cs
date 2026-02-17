@@ -61,6 +61,10 @@ public class GoalTrigger : MonoBehaviour
         
         // Cargar pantalla de victoria
         Debug.Log("Cargando pantalla de victoria...");
+        // Guardar tiempo restante para la pantalla de victoria
+        float timeLeft = FindObjectOfType<GameTimer>().GetTimeRemaining();
+        PlayerPrefs.SetFloat("TimeRemaining", timeLeft);
+        PlayerPrefs.Save();
         SceneManager.LoadScene(victorySceneName);
     }
 

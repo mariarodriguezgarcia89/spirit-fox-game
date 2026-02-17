@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Maneja la interfaz de usuario (HUD)
@@ -8,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI References")]
     [Tooltip("Texto que muestra la puntuación")]
-    [SerializeField] private Text scoreText;
+    [SerializeField] private TMP_Text scoreText;
     
     [Tooltip("Imágenes de los corazones de vida")]
     [SerializeField] private Image[] heartImages;
@@ -27,7 +28,6 @@ public class UIManager : MonoBehaviour
     
     void Update()
     {
-        // Actualizar vida cada frame
         UpdateHealthDisplay();
     }
     
@@ -61,17 +61,9 @@ public class UIManager : MonoBehaviour
         
         int currentHealth = playerHealth.GetCurrentHealth();
         
-        // Mostrar/ocultar corazones según vida actual
         for (int i = 0; i < heartImages.Length; i++)
         {
-            if (i < currentHealth)
-            {
-                heartImages[i].enabled = true; // Mostrar corazón
-            }
-            else
-            {
-                heartImages[i].enabled = false; // Ocultar corazón
-            }
+            heartImages[i].enabled = i < currentHealth;
         }
     }
 }

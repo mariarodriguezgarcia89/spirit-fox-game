@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 /// <summary>
 /// Maneja la vida del jugador
 /// </summary>
@@ -24,22 +25,28 @@ public class PlayerHealth : MonoBehaviour
     /// <summary>
     /// El jugador recibe daño
     /// </summary>
-    public void TakeDamage(int damage)
+    /// <summary>
+/// El jugador recibe daño
+/// </summary>
+public void TakeDamage(int damage)
+{
+    if (isInvulnerable) return;
+    
+    currentHealth -= damage;
+    Debug.Log("¡Daño recibido! Vida actual: " + currentHealth);
+    
+    // Reproducir sonido de daño
+    AudioManager.Instance.PlayDamage();
+    
+    // Efecto visual de daño (parpadeo)
+    StartCoroutine(InvulnerabilityFlash());
+    
+    // Verificar si murió
+    if (currentHealth <= 0)
     {
-        if (isInvulnerable) return;
-        
-        currentHealth -= damage;
-        Debug.Log("¡Daño recibido! Vida actual: " + currentHealth);
-        
-        // Efecto visual de daño (parpadeo)
-        StartCoroutine(InvulnerabilityFlash());
-        
-        // Verificar si murió
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        Die();
     }
+}
     
     /// <summary>
     /// Parpadeo de invulnerabilidad

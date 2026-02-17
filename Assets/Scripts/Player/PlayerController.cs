@@ -116,11 +116,12 @@ public class PlayerController : MonoBehaviour
         {
             // Aplicar fuerza de salto
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            
+            // Reproducir sonido de salto
+            AudioManager.Instance.PlayJump();
+            
             jumpPressed = false;
         }
-        
-        // Resetear para el siguiente frame
-        jumpPressed = false;
     }
     
     /// <summary>
