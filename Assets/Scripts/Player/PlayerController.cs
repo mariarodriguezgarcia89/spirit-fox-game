@@ -21,10 +21,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     
     [Tooltip("Radio de detección del suelo")]
-    [SerializeField] private float groundCheckRadius = 0.3f; // Un poco más grande para evitar fallos
+    [SerializeField] private float groundCheckRadius = 0.3f;
     
     [Tooltip("Capa que representa el suelo")]
     [SerializeField] private LayerMask groundLayer;
+
+    [Header("Jump Feel")]
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
     
     // Referencias de componentes
     private Rigidbody2D rb;
@@ -41,7 +45,6 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         
-        // Inicializamos los saltos extra
         extraJumps = extraJumpsValue;
 
         if (rb == null) Debug.LogError("¡Falta Rigidbody2D!");
@@ -55,7 +58,7 @@ public class PlayerController : MonoBehaviour
         CheckGround();
         UpdateAnimations();
 
-        // Lógica de Salto en Update para respuesta instantánea
+        // Lógica de Salto
         if (Input.GetButtonDown("Jump"))
         {
             if (isGrounded)
@@ -65,7 +68,7 @@ public class PlayerController : MonoBehaviour
             else if (extraJumps > 0)
             {
                 ApplyJump();
-                extraJumps--; // Gastamos un salto extra en el aire
+                extraJumps--;
             }
         }
 
@@ -73,6 +76,16 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             extraJumps = extraJumpsValue;
+        }
+
+        // Fall multiplier para caída más natural
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
     
@@ -88,13 +101,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        // Aplicamos velocidad horizontal manteniendo la vertical del Rigidbody
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     private void ApplyJump()
     {
-        // Reseteamos la velocidad vertical antes de saltar para que el impulso sea siempre igual
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         
         if (AudioManager.Instance != null) 
@@ -104,12 +115,7 @@ public class PlayerController : MonoBehaviour
     private void CheckGround()
     {
         if (groundCheck == null) return;
-
-        // Detectamos si el círculo de los pies toca la capa de suelo
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        
-        // Debug para ver el estado en la consola (puedes borrarlo luego)
-        // Debug.Log("En suelo: " + isGrounded);
     }
     
     private void UpdateAnimations()
@@ -130,7 +136,6 @@ public class PlayerController : MonoBehaviour
     
     private void OnDrawGizmosSelected()
     {
-        // Dibuja el círculo en la ventana de escena para ajustar el sensor
         if (groundCheck != null)
         {
             Gizmos.color = Color.red;

@@ -660,14 +660,14 @@ MonoBehaviour:
   musicSource: {fileID: 526546174}
   sfxSource: {fileID: 526546173}
   backgroundMusic: {fileID: 8300000, guid: 65232b4d2e929754da284567d7188a2b, type: 3}
-  menuMusic: {fileID: 8300000, guid: 183140dc3dd1a36429cfefbabd11b17a, type: 3}
+  menuMusic: {fileID: 8300000, guid: 3a4e80be295b4f240956f0853ca29e05, type: 3}
   jumpSound: {fileID: 8300000, guid: ecb21d5dacea42446b72ef15ead345ac, type: 3}
   collectGemSound: {fileID: 8300000, guid: 702a73da36bc1aa4e8557066dca6f725, type: 3}
   damageSound: {fileID: 8300000, guid: d719a72641d862d4b80d903f550e75dd, type: 3}
   enemyDeathSound: {fileID: 8300000, guid: f4b3c63bcfbac31488801cc1eb17d5a6, type: 3}
   chestOpenSound: {fileID: 8300000, guid: ed1eca8144dc9974ca59e281314959a4, type: 3}
   buttonClickSound: {fileID: 8300000, guid: ecb21d5dacea42446b72ef15ead345ac, type: 3}
-  gameOverMusic: {fileID: 8300000, guid: d59fa57deb427314a926aa93c1753838, type: 3}
+  gameOverMusic: {fileID: 8300000, guid: 03ac48268ae6e8c41bbfd428246bef86, type: 3}
   victoryMusic: {fileID: 8300000, guid: 3295ca24bfa3930489614a390c9cc14d, type: 3}
 --- !u!4 &526546176
 Transform:

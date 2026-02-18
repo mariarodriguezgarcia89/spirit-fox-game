@@ -46,24 +46,26 @@ public class CameraFollow : MonoBehaviour
     {
         if (target == null) return;
         
-        // Calcular posición deseada
         Vector3 desiredPosition = target.position + offset;
         
-        // Aplicar límites si están activados
         if (useLimits)
         {
-            desiredPosition.x = Mathf.Clamp(desiredPosition.x, minX, maxX);
-            desiredPosition.y = Mathf.Clamp(desiredPosition.y, minY, maxY);
+            // Calculamos el tamaño visible de la cámara
+            Camera cam = Camera.main;
+            float camHalfHeight = cam.orthographicSize;
+            float camHalfWidth = cam.orthographicSize * cam.aspect;
+
+            // Ajustamos los límites teniendo en cuenta el tamaño de la cámara
+            desiredPosition.x = Mathf.Clamp(desiredPosition.x, minX + camHalfWidth, maxX - camHalfWidth);
+            desiredPosition.y = Mathf.Clamp(desiredPosition.y, minY + camHalfHeight, maxY - camHalfHeight);
         }
         
-        // Interpolar suavemente hacia la posición deseada
         Vector3 smoothedPosition = Vector3.Lerp(
             transform.position, 
             desiredPosition, 
             smoothSpeed
         );
         
-        // Aplicar la nueva posición
         transform.position = smoothedPosition;
     }
 }

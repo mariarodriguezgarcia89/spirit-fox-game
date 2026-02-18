@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Hace que el enemigo patrullaje entre dos puntos
+/// Hace que el enemigo patrullaje entre dos puntos y salte aleatoriamente
 /// </summary>
 public class EnemyPatrol : MonoBehaviour
 {
@@ -11,6 +11,16 @@ public class EnemyPatrol : MonoBehaviour
     
     [Tooltip("Distancia que recorre hacia cada lado")]
     [SerializeField] private float patrolDistance = 3f;
+
+    [Header("Jump Settings")]
+    [Tooltip("Fuerza del salto")]
+    [SerializeField] private float jumpForce = 6f;
+
+    [Tooltip("Tiempo mínimo entre saltos")]
+    [SerializeField] private float minJumpInterval = 1.5f;
+
+    [Tooltip("Tiempo máximo entre saltos")]
+    [SerializeField] private float maxJumpInterval = 4f;
     
     // Referencias
     private Rigidbody2D rb;
@@ -19,18 +29,29 @@ public class EnemyPatrol : MonoBehaviour
     // Estado
     private Vector2 startPosition;
     private bool movingRight = true;
+    private float jumpTimer;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // Buscar SpriteRenderer en hijos si no está en este objeto
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
         startPosition = transform.position;
+        ResetJumpTimer();
     }
     
+    void Update()
+    {
+        jumpTimer -= Time.deltaTime;
+        if (jumpTimer <= 0f)
+        {
+            Jump();
+            ResetJumpTimer();
+        }
+    }
+
     void FixedUpdate()
     {
         Patrol();
@@ -57,5 +78,15 @@ public class EnemyPatrol : MonoBehaviour
             if (transform.position.x <= leftLimit)
                 movingRight = true;
         }
+    }
+
+    private void Jump()
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+    }
+
+    private void ResetJumpTimer()
+    {
+        jumpTimer = Random.Range(minJumpInterval, maxJumpInterval);
     }
 }
