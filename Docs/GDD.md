@@ -27,10 +27,10 @@ El juego combina la jugabilidad clásica de plataformas de desplazamiento vertic
 
 ## 2. Género y subgénero
 
-| **Género principal** | Plataformas 2D |
-| **Subgénero** | Plataformas de desplazamiento vertical / Arcade de exploración |
-| **Perspectiva** | Vista lateral 2D |
-| **Modo de juego** | Un jugador |
+**Género principal**: Plataformas 2D  
+**Subgénero**: Plataformas de desplazamiento vertical / Arcade de exploración  
+**Perspectiva**: Vista lateral 2D  
+**Modo de juego**: Un jugador  
 
 ## 3. Público objetivo
 
