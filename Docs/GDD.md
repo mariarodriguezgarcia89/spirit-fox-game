@@ -1,6 +1,6 @@
 # 🦊 GDD – Spirit Fox
 **Game Design Document v1.0**  
-**Autor:** María Rodríguez
+**Autor:** María Rodríguez  
 **Módulo:** Desarrollo de Aplicaciones Multiplataforma – 2º DAM  
 **Motor:** Unity 2D (LTS)  
 **Fecha:** Febrero 2026
