@@ -8,6 +8,8 @@ public class MainMenuManager : MonoBehaviour
 {
     void Start()
     {
+
+        Cursor.visible = true;
         // Asegurarse de que suena la música del menú
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayMenuMusic();

@@ -8,6 +8,8 @@ public class GameOverScreen : MonoBehaviour
 {
     void Start()
     {
+
+        Cursor.visible = true;
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayGameOverMusic();
     }

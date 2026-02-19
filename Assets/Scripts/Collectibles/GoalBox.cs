@@ -43,21 +43,17 @@ public class GoalBox : MonoBehaviour
 
     private IEnumerator GoalSequence()
     {
-        // Reproducir sonido de cofre/victoria
         AudioManager.Instance.PlayChestOpen();
         
-        // 1. Ocultar la caja (opcional)
         if (hideBoxWhenActivated && boxRenderer != null)
         {
             boxRenderer.enabled = false;
         }
         
-        // 2. Hacer aparecer la estrella
         magicStar.SetActive(true);
         Vector3 startPos = magicStar.transform.position;
         Vector3 endPos = startPos + Vector3.up * starPopHeight;
         
-        // 3. Animar la estrella saliendo
         float elapsed = 0f;
         
         while (elapsed < starPopDuration)
@@ -78,10 +74,8 @@ public class GoalBox : MonoBehaviour
         
         magicStar.transform.position = endPos;
         
-        // 4. Esperar un momento antes de mostrar victoria
         yield return new WaitForSeconds(delayBeforeVictory);
         
-        // 5. Mostrar pantalla de victoria
         ShowVictory();
     }
 

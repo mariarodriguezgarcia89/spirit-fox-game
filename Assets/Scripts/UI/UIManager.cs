@@ -7,7 +7,6 @@ using TMPro;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    
     [Header("UI References")]
     [Tooltip("Texto que muestra la puntuación")]
     [SerializeField] private TMP_Text scoreText;
@@ -23,6 +22,7 @@ public class UIManager : MonoBehaviour
     
     void Start()
     {
+        Cursor.visible = false;
         UpdateScoreDisplay();
         UpdateHealthDisplay();
     }
@@ -40,6 +40,14 @@ public class UIManager : MonoBehaviour
         currentScore += points;
         UpdateScoreDisplay();
         Debug.Log("Puntuación actual: " + currentScore);
+    }
+
+    /// <summary>
+    /// Guarda la puntuación en PlayerPrefs para pasarla entre escenas
+    /// </summary>
+    public void SaveScore()
+    {
+        PlayerPrefs.SetInt("FinalScore", currentScore);
     }
     
     /// <summary>

@@ -13,11 +13,14 @@ public class VictoryScreen : MonoBehaviour
     
     void Start()
     {
+        Cursor.visible = true;
         if (AudioManager.Instance != null)
             AudioManager.Instance.PlayVictoryMusic();
 
-        if (finalScoreText != null)
-            finalScoreText.text = "Puntuación: 0";
+        if (finalScoreText != null){
+            int finalScore = PlayerPrefs.GetInt("FinalScore", 0);
+            finalScoreText.text = "Puntuación: " + finalScore;
+        }
 
         if (finalTimeText != null)
         {

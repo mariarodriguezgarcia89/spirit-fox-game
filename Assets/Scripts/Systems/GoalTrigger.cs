@@ -30,43 +30,37 @@ public class GoalTrigger : MonoBehaviour
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
-{
-    Debug.Log("¡Algo tocó el Goal! Objeto: " + collision.gameObject.name + " | Tag: " + collision.tag);
-    
-    // Verificar si es el jugador y no ha sido abierta aún
-    if (collision.CompareTag("Player") && !hasBeenOpened)
     {
-        hasBeenOpened = true;
-        Debug.Log("¡Caja tocada! Abriendo...");
+        Debug.Log("¡Algo tocó el Goal! Objeto: " + collision.gameObject.name + " | Tag: " + collision.tag);
         
-        // Iniciar la secuencia de apertura
-        StartCoroutine(OpenBoxSequence());
+        if (collision.CompareTag("Player") && !hasBeenOpened)
+        {
+            hasBeenOpened = true;
+            Debug.Log("¡Caja tocada! Abriendo...");
+            StartCoroutine(OpenBoxSequence());
+        }
     }
-}
     
-    /// <summary>
-    /// Secuencia de abrir la caja y luego ir a victoria
-    /// </summary>
     private IEnumerator OpenBoxSequence()
     {
-        // Cambiar a sprite de caja abierta
         if (openBoxSprite != null && spriteRenderer != null)
         {
             spriteRenderer.sprite = openBoxSprite;
             Debug.Log("¡Caja abierta!");
         }
         
-        // Esperar un momento para que el jugador vea la caja abierta
         yield return new WaitForSeconds(delayBeforeVictory);
         
-        // Cargar pantalla de victoria
         Debug.Log("Cargando pantalla de victoria...");
-        // Guardar tiempo restante para la pantalla de victoria
+        
         float timeLeft = FindObjectOfType<GameTimer>().GetTimeRemaining();
         PlayerPrefs.SetFloat("TimeRemaining", timeLeft);
+        
+        UIManager uiManager = FindObjectOfType<UIManager>();
+        if (uiManager != null)
+            uiManager.SaveScore();
+        
         PlayerPrefs.Save();
         SceneManager.LoadScene(victorySceneName);
     }
-
-    
 }
