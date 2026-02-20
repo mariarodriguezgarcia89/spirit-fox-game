@@ -9962,6 +9962,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 15
   extraJumpsValue: 1
+  fallThreshold: -150
   groundCheck: {fileID: 1168094916}
   groundCheckRadius: 0.7
   groundLayer:

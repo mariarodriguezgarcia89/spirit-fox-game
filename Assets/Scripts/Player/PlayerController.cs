@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controla el movimiento del zorro espiritual con Doble Salto incluido.
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     [Tooltip("Cantidad de saltos extra permitidos (1 = Doble Salto)")]
     [SerializeField] private int extraJumpsValue = 1;
+
+    [Header("Fall Death")]
+    [SerializeField] private float fallThreshold = -10f;
     private int extraJumps;
     
     [Header("Ground Check")]
@@ -87,6 +91,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
+
+        CheckFallDeath();
+    }
+
+    private void Die()
+    {
+        enabled = false; // Desactiva el input del jugador
+        SceneManager.LoadScene("GameOver");
     }
     
     void FixedUpdate()
@@ -140,6 +152,23 @@ public class PlayerController : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+    }
+
+    private float deathDelay = 3f; // 3 segundos antes de empezar a comprobar
+    private float timer = 0f;
+
+    private void CheckFallDeath()
+    {
+        timer += Time.deltaTime;
+        if (timer < deathDelay) return; // Espera 3 segundos antes de comprobar
+    
+        Debug.Log("Posición Y actual: " + transform.position.y);
+    
+        if (transform.position.y < fallThreshold)
+        {
+            Debug.Log("¡MUERTE! Y: " + transform.position.y);
+            Die();
         }
     }
 }
