@@ -14,11 +14,14 @@ public class PlayerHealth : MonoBehaviour
     private bool isInvulnerable = false;
     private SpriteRenderer spriteRenderer;
     
-    void Start()
+    void Awake()
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+    }
+
+    void Start()
+    {
         Debug.Log("PlayerHealth: Vida inicial = " + currentHealth);
     }
     
